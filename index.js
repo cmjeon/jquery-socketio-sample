@@ -17,13 +17,13 @@ io.on('connection', (socket) => {
   socket.on('nickname', (nickname) => {
     // console.log('### nickname', data)
     nickName = nickname;
-    socket.emit('message', `${nickname} you are logged in !`);
-    socket.broadcast.emit('message', `${nickname} just logged in!`);
+    socket.emit('message', `[SYSTEM] ${nickname}, You are logged in !`);
+    socket.broadcast.emit('message', `[SYSTEM] ${nickname} just logged in!`);
   })
 
   socket.on('message', (data) => {
-    nickName = (nickName === undefined) ? '[UNKNOWN]' : nickName
-    io.emit('message', `${nickName} sent : ${data}`)
+    nickName = (nickName === undefined) ? 'UNKNOWN' : nickName
+    io.emit('message', `[${nickName}] : ${data}`)
   })
 
   socket.on('count', (data) => {

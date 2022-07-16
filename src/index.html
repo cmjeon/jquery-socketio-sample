@@ -27,6 +27,7 @@
       $('#message-btn').on('click', function () {
         const message = $('#message').val();
         socket.emit('message', message);
+        $('#message').val("");
       })
 
       $('#count-btn').on('click', function () {
