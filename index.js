@@ -22,7 +22,24 @@ io.on('connection', (socket) => {
   })
 
   socket.on('message', (data) => {
+    nickName = (nickName === undefined) ? '[UNKNOWN]' : nickName
     io.emit('message', `${nickName} sent : ${data}`)
+  })
+
+  socket.on('count', (data) => {
+    socket.emit('count', `[START]`)
+    const reqCount = parseInt(data)
+    let count = 0;
+    var interval = setInterval(function() {
+      if(count < reqCount) {
+        const randomValue = Math.random()
+        socket.emit('count', `${count+1} : ${randomValue}`)
+      } else {
+        clearInterval(interval);
+        socket.emit('count', `[END]`)
+      }
+      count ++;
+    }, 1000);
   })
 })
 

@@ -28,20 +28,46 @@
         const message = $('#message').val();
         socket.emit('message', message);
       })
+
+      $('#count-btn').on('click', function () {
+        const message = $('#count').val();
+        socket.emit('count', message);
+      })
+
+      socket.on('count', function(message) {
+        $('#count-message').prepend(`<div>${message}</div>`);
+      })
     });
   </script>
-  <h1>Communication with socket.io !</h1>
+  <h1>socket.io 채팅 테스트</h1>
   <div>
-    <label>NickName</label>
-    <input type="input" id="nick-name">
-    <input type="button" value="LOGIN" id="nick-btn"/>
+    <div>
+      <label>NickName</label>
+      <input type="input" id="nick-name">
+      <input type="button" value="LOGIN" id="nick-btn"/>
+    </div>
+    <div>
+      <label>Message</label>
+      <input type="input" id="message">
+      <input type="button" value="SEND" id="message-btn"/>
+    </div>
+    <div>
+      <h2>From Server</h2>
+      <div id="server-message"></div>
+    </div>
   </div>
-  <p>
-    <input type="input" id="message">
-    <input type="button" value="SEND" id="message-btn"/>
-  </p>
-  <div id="server-message">
-
+  <hr>
+  <h1>socket.io 서버로부터 데이터 받기</h1>
+  <div>
+    <div>
+      <label>받을 횟수</label>
+      <input type="input" id="count">
+      <input type="button" value="REQUEST" id="count-btn"/>
+    </div>
+    <div>
+      <h2>From Server</h2>
+      <div id="count-message"></div>
+    </div>
   </div>
 </body>
 </html>
