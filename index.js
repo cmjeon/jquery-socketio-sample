@@ -13,14 +13,16 @@ const PORT = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
   // console.log('connected...' + socket.id);
+  let nickName;
   socket.on('nickname', (nickname) => {
     // console.log('### nickname', data)
-    io.emit('message', `${nickname} you are logged in !`);
+    nickName = nickname;
+    socket.emit('message', `${nickname} you are logged in !`);
     socket.broadcast.emit('message', `${nickname} just logged in!`);
   })
 
   socket.on('message', (data) => {
-    io.emit('message', `반가워 ${data}`)
+    io.emit('message', `${nickName} sent : ${data}`)
   })
 })
 
