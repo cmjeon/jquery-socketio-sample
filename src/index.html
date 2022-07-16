@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Socket.io</title>
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script>
+    const socket = io();
+    console.log('socket conneted....');
+
+    $(document).ready(function() {
+      console.log( "ready!!!" );
+
+      socket.on('message', function (message) {
+        console.log('### message', message)
+        $('#server-message').prepend(`<div>### ${message}</div>`);
+      })
+
+      $("#nick-btn").on('click', function() {
+        const nickName = $('#nick-name').val();
+        socket.emit('nickname', nickName);
+      })
+
+      $('#message-btn').on('click', function () {
+        const message = $('#message').val();
+        socket.emit('message', message);
+      })
+    });
+  </script>
+  <h1>Communication with socket.io !</h1>
+  <div>
+    <label>NickName</label>
+    <input type="input" id="nick-name">
+    <input type="button" value="SEND" id="nick-btn"/>
+  </div>
+  <p>
+    <input type="input" id="message">
+    <input type="button" value="SEND" id="message-btn"/>
+  </p>
+  <div id="server-message">
+
+  </div>
+</body>
+</html>
