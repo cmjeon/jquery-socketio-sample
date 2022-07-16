@@ -10,6 +10,17 @@ jquery 에 socket.io 를 써서 DOM 에 요소를 추가하는 것이 가능한�
 
 # 실행방법
 
+nodejs 설치가 반드시 필요합니다.
+
+```bash
+# node 확인
+$ node -v
+
+# 없으면 설치
+```
+
+어플리케이션 실행하기
+
 ```bash
 # install
 $ npm i
